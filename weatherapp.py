@@ -19,8 +19,9 @@ api_key = "0f71419bc1914e70b7d4084c84eff8b9"
 base_url = "http://api.openweathermap.org/data/2.5/weather?"
 
 #prompts user to enter city name
-city_name = "Nairobi"
 
+city_name = str(input("Enter city here: "))
+#city_name = "Delhi"
 #base url with remaining parameters
 complete_url = base_url + "appid=" + api_key + "&q=" + city_name
 
@@ -50,7 +51,9 @@ if x["cod"] != "404":
     current_humidity = y["humidity"]
 
     temp_max = y["temp_max"]
+    temp_max_celcius = temp_max - 273
     temp_min = y["temp_min"]
+    temp_min_celcius = temp_min - 273
 
     #value for wind
     wind_data = x["wind"]
@@ -86,7 +89,23 @@ if x["cod"] != "404":
     # Format as human-readable time
     sunrise_time = sunrise_local.strftime('%Y-%m-%d %H:%M:%S')
     sunset_time = sunset_local.strftime('%Y-%m-%d %H:%M:%S')
+def handle_submit(e):
+        global city_name
+        search_value = e.data
+        if type(e.data) == str:
+            city_name = search_value
+        else:
+            city_name = 'Nairobi'   
+        print(search_value)
+        print(city_name)
+        return city_name
 
+        '''if e.data == "true":
+            city_name = str(e.control.value)
+        else:
+            city_name = "Nairobi"
+        return city_name'''
+lambda e: handle_submit(e)
 #app
 def main(page: Page):
     page.horizontal_alignment = 'center'
@@ -99,17 +118,7 @@ def main(page: Page):
     
     #submit from search bar
     
-    def handle_submit(e):
-        search_value = e.control.value
-        if search_value:
-            city_name = search_value
-        else:
-            city_name = 'Nairobi'
-        '''if e.data == "true":
-            city_name = str(e.control.value)
-        else:
-            city_name = "Nairobi"
-        return city_name'''
+    
 
    
     
@@ -134,7 +143,8 @@ def main(page: Page):
         bar_hint_text='Search cities',
         view_hint_text='Search cities',
         bar_leading=IconButton(icon='search'),
-        on_submit=handle_submit,
+        on_submit= lambda e: handle_submit(e),
+        #city_name = lambda e: handle_submit(e)
         #bar_trailing=[Text("Search here", color='white')]
     )
     
@@ -236,7 +246,7 @@ def main(page: Page):
                                     controls=[
                                         Container(
                                             alignment=alignment.center,
-                                            image=flet.Image("assets/weather-app.png"),
+                                            #image=flet.Image("assets/weather-app.png"),
                                             width=20,
                                             height=20
                                         ),
@@ -253,7 +263,7 @@ def main(page: Page):
                                     controls=[
                                         Container(
                                             alignment=alignment.center,
-                                            image=flet.Image("assets\weather-app.png"),
+                                            #image=flet.Image("assets\weather-app.png"),
                                             width=20,
                                             height=20
                                         ),
@@ -270,7 +280,7 @@ def main(page: Page):
                                     controls=[
                                         Container(
                                             alignment=alignment.center,
-                                            image=flet.Image("assets\weather-app.png"),
+                                            #image=flet.Image("/weather-app.png"),
                                             width=20,
                                             height=20
                                         ),
