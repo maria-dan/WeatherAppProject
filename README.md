@@ -1,3 +1,10 @@
+# Group Members' Names and Contributions
+Zubeir Abdi - 673161 
+Collins Omondi - 673871 
+ian Otieno Odongo - 673043 
+Eugene Lesiyampe - 673681 
+Elvis Igiha - 672014 
+Kamsiyochukwu Maria Dan-Okereke - 670462
 # Weather App
 
 A cross-platform desktop and mobile weather application built with Python and Flet, leveraging the OpenWeather API to fetch and display current weather data.
